@@ -45,8 +45,8 @@ router.post('/iletisim/:id', (req, res) => {
             console.error('Error updating data in the database: ' + err.stack);
             return;
         }
-        console.log('Data updated successfully');
-        res.redirect('/iletisim'); // İletişim sayfasına yönlendir
+        console.log('Updated successfully');
+        res.redirect('/iletisim'); 
     });
 });
 
@@ -58,7 +58,7 @@ router.get('/iletisim/delete/:id', (req, res) => {
             return;
         }
         console.log('Data updated successfully');
-        res.redirect('/iletisim'); // İletişim sayfasına yönlendir
+        res.redirect('/iletisim'); 
     });
 
 });
@@ -75,14 +75,14 @@ router.post('/addnew/new', (req, res) => {
     const arL = req.body.ar;
 
 
-    var sql = `INSERT INTO iletişim(id,tr,en,rs,ar) VALUES (NULL,'${trL}',' ${enL}','${rsL}','${arL}');` // mysql kodları burda çalışıyor burdan istedigin sorguyu yazarsın
+    var sql = `INSERT INTO iletişim(id,tr,en,rs,ar) VALUES (NULL,'${trL}',' ${enL}','${rsL}','${arL}');` 
     con.query(sql, (err, result) => {
         if (err) {
             console.error('Error updating data in the database: ' + err.stack);
             return;
         }
         console.log('New data updated successfully');
-        res.redirect('/iletisim'); // İletişim sayfasına yönlendir
+        res.redirect('/iletisim'); 
     });
 })
 
@@ -92,12 +92,12 @@ router.get('/update', (req, res) => {
 
     con.query(sorgu, function (err, result) {
         if (err) {
-            console.error('Error deleting data from the database: ' + err.stack);
+            console.error('Error : ' + err.stack);
             return;
         }
-        console.log('Data deleted successfully');
+        console.log('Deleted successfully');
 
-        // ID'leri güncelleme işlemi
+        
         const selectSorgu = 'SELECT * FROM iletişim ORDER BY id;';
         con.query(selectSorgu, function (err, rows) {
             if (err) {
@@ -125,10 +125,10 @@ router.get('/update', (req, res) => {
 
             Promise.all(updatePromises)
                 .then(() => {
-                    console.log('IDs updated successfully');
+                    console.log('Successfully');
                 })
                 .catch((err) => {
-                    console.error('Error updating data in the database: ' + err.stack);
+                    console.error('Error : ' + err.stack);
                 });
         });
     });
